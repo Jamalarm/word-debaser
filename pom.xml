@@ -6,7 +6,11 @@
 
     <groupId>kc</groupId>
     <artifactId>word-debaser</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
+    <modules>
+        <module>core</module>
+    </modules>
 
     <dependencies>
         <dependency>
