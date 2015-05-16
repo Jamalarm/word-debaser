@@ -18,7 +18,7 @@ public class SimpleState implements IState {
     }
 
     public PlayerColour getPlayerColour(int x, int y) {
-        return null;
+        return colours[x][y];
     }
 
     public boolean isValid() {

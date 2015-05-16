@@ -1,9 +1,9 @@
 package colours;
 
 public enum PlayerColour {
-    BLUE("\u001B[34m"),
-    ORANGE("\u001B[31m"),
-    NONE("\u001B[30m");
+    BLUE("\u001B[44;37m"),
+    ORANGE("\u001B[41;37m"),
+    NONE("\u001B[0m");
 
     private String colourCode;
 
