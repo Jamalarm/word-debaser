@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class SimpleBoard implements IBoard {
 
-    public static final String SEPARATOR = " ";
+    public static final String SEPARATOR = " \u001B[0m";
 
     private char[][] chars;
 
