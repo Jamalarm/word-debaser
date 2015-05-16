@@ -2,9 +2,7 @@ package board;
 
 public class SimpleBoard implements IBoard {
 
-    public static final int BOARD_X = 10;
-    public static final int BOARD_Y = 13;
-    public static final String SEPERATOR = " ";
+    public static final String SEPARATOR = " ";
 
     private char[][] chars;
 
@@ -12,6 +10,10 @@ public class SimpleBoard implements IBoard {
         this.chars = chars;
     }
 
+    /**
+     * Builds a board object using a continuous string, filling from the top left in rows
+     * @param allChars Unbroken string of length BOARD_X * BOARD_Y
+     */
     public SimpleBoard(String allChars) {
         allChars = allChars.toUpperCase();
         if (allChars.length() == BOARD_X * BOARD_Y) {
@@ -22,8 +24,8 @@ public class SimpleBoard implements IBoard {
             }
             for (int y = 0; y < BOARD_Y; y++) {
                 for (int x = 0; x < BOARD_X; x++) {
-                    int strindex = (y * BOARD_X) + x;
-                    chars[x][y] = allChars.charAt(strindex);
+                    int strIndex = (y * BOARD_X) + x;
+                    chars[x][y] = allChars.charAt(strIndex);
                 }
             }
         }
@@ -35,7 +37,8 @@ public class SimpleBoard implements IBoard {
                 return chars[x][y];
             }
         }
-        return ' '; //FIXME
+        throw new IndexOutOfBoundsException(
+                String.format("Index requested (%d, %d) is outside of the Game Board", x, y));
     }
 
     @Override
@@ -43,10 +46,10 @@ public class SimpleBoard implements IBoard {
         StringBuilder out = new StringBuilder();
 
         for (int y = 0; y < BOARD_Y; y++) {
-            out.append(SEPERATOR);
+            out.append(SEPARATOR);
             for (int x = 0; x < BOARD_X; x++) {
                 out.append(chars[x][y]);
-                out.append(SEPERATOR);
+                out.append(SEPARATOR);
             }
             out.append("\n");
         }

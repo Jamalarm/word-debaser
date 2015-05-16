@@ -1,9 +1,9 @@
 package api;
 
-import state.IGameState;
+import state.IState;
 
 import java.awt.*;
 
 public interface IStateOCRParser {
-    IGameState parseState(Image img);
+    IState parseState(Image img);
 }

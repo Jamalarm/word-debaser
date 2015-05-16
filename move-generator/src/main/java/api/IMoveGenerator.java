@@ -1,12 +1,12 @@
 package api;
 
 import colours.PlayerColour;
-import state.IGameState;
+import state.IState;
 
 import java.util.Collection;
 
 public interface IMoveGenerator {
 
-    Collection<IGameState> getPossibleMoveStates(IGameState state, PlayerColour player);
+    Collection<IMovedState> getPossibleMoveStates(IState state, PlayerColour player);
 
 }
