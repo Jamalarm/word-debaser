@@ -23,4 +23,6 @@ public interface IState extends IBoard {
 
     Set<int[]> getPlayerCoords(PlayerColour colour);
 
+    StateBuilder toBuilder();
+
 }

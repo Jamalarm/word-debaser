@@ -3,6 +3,7 @@ package state;
 import board.IBoard;
 import colours.PlayerColour;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -59,5 +60,19 @@ public class SimpleState implements IState {
         }
 
         return out.toString();
+    }
+
+    public StateBuilder toBuilder() {
+        StateBuilder builder = new StateBuilder();
+        builder.setBoard(board);
+
+        //Defensive copy
+        PlayerColour[][] coloursCopy = new PlayerColour[colours.length][];
+        for (int i = 0; i < colours.length; i++) {
+            coloursCopy[i] = Arrays.copyOf(colours[i], colours[i].length);
+        }
+
+        builder.setColours(coloursCopy);
+        return builder;
     }
 }
