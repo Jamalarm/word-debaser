@@ -10,6 +10,10 @@
     <version>1.0</version>
     <modules>
         <module>core</module>
+        <module>api</module>
+        <module>ocr</module>
+        <module>move-generator</module>
+        <module>scorer</module>
     </modules>
 
     <dependencies>

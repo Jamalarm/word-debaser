@@ -1,4 +1,4 @@
-package api;
+package colours;
 
 public enum PlayerColour {
     BLUE,

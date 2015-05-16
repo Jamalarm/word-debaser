@@ -1,4 +1,7 @@
-package api;
+package state;
+
+import board.IBoard;
+import colours.PlayerColour;
 
 public interface IGameState {
     IBoard getBoard();

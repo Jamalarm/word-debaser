@@ -9,34 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>core</artifactId>
+    <artifactId>move-generator</artifactId>
 
     <dependencies>
-
         <dependency>
             <groupId>kc</groupId>
             <artifactId>api</artifactId>
             <version>1.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>kc</groupId>
-            <artifactId>move-generator</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>kc</groupId>
-            <artifactId>ocr</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>kc</groupId>
-            <artifactId>scorer</artifactId>
-            <version>1.0</version>
-        </dependency>
-
     </dependencies>
 
 

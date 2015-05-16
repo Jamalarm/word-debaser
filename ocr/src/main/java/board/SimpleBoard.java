@@ -1,10 +1,5 @@
 package board;
 
-import api.IBoard;
-import exceptions.WordDebaserException;
-
-import java.util.Arrays;
-
 public class SimpleBoard implements IBoard {
 
     public static final int BOARD_X = 10;
@@ -34,13 +29,13 @@ public class SimpleBoard implements IBoard {
         }
     }
 
-    public char getChar(int x, int y) throws WordDebaserException {
+    public char getChar(int x, int y) {
         if (0 <= x && x < chars.length) {
             if (0 <= y && y < chars[x].length) {
                 return chars[x][y];
             }
         }
-        throw new WordDebaserException("Attempted to access bad index in word board");
+        return ' '; //FIXME
     }
 
     @Override
