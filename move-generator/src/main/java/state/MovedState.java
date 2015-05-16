@@ -4,6 +4,8 @@ import api.IMovedState;
 import colours.PlayerColour;
 import move.Move;
 
+import java.util.Set;
+
 public class MovedState implements IMovedState {
 
     private final IState delegate;
@@ -20,6 +22,10 @@ public class MovedState implements IMovedState {
 
     public boolean isValid() {
         return false;
+    }
+
+    public Set<int[]> getPlayerCoords(PlayerColour colour) {
+        return null;
     }
 
     public PlayerColour getPlayerColour(int x, int y) {

@@ -3,6 +3,8 @@ package state;
 import board.IBoard;
 import colours.PlayerColour;
 
+import java.util.Set;
+
 public interface IState extends IBoard {
 
     /**
@@ -18,5 +20,7 @@ public interface IState extends IBoard {
      * @return true if the game state is legal
      */
     boolean isValid();
+
+    Set<int[]> getPlayerCoords(PlayerColour colour);
 
 }

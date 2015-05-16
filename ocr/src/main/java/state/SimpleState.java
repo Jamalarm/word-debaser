@@ -3,6 +3,9 @@ package state;
 import board.IBoard;
 import colours.PlayerColour;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static board.SimpleBoard.SEPARATOR;
 
 public class SimpleState implements IState {
@@ -23,6 +26,18 @@ public class SimpleState implements IState {
 
     public boolean isValid() {
         return false;
+    }
+
+    public Set<int[]> getPlayerCoords(PlayerColour colour) {
+        Set<int[]> playerCoords = new HashSet<int[]>();
+        for (int x = 0; x < colours.length; x++) {
+            for (int y = 0; y < colours[0].length; y++) {
+                if (colours[x][y].equals(colour)) {
+                    playerCoords.add(new int[]{x, y});
+                }
+            }
+        }
+        return playerCoords;
     }
 
     public char getChar(int x, int y) {

@@ -48,11 +48,7 @@ public class StateGenerationUtil {
         }
 
 
-        SimpleState state = new SimpleState(simpleBoard, colours);
-
-        System.out.println(state);
-
-        return null;
+        return new SimpleState(simpleBoard, colours);
     }
 
 }
