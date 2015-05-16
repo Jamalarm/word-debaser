@@ -39,3 +39,4 @@ Thumbs.db
 # Intellij Specific #
 #####################
 *.iml
+.idea
