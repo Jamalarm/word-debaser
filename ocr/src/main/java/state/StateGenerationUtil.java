@@ -4,7 +4,9 @@ import board.SimpleBoard;
 import colours.PlayerColour;
 import org.apache.commons.lang.RandomStringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 
 import static board.IBoard.BOARD_X;
 import static board.IBoard.BOARD_Y;
@@ -49,6 +51,14 @@ public class StateGenerationUtil {
 
 
         return new SimpleState(simpleBoard, colours);
+    }
+
+    public static Collection<IState> generateRandomStates(int count, double fillQuotient) {
+        Collection<IState> states = new ArrayList<IState>();
+        for (int i = 0; i < count; i++) {
+            states.add(generateRandomState(fillQuotient));
+        }
+        return states;
     }
 
 }

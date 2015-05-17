@@ -23,9 +23,9 @@ public class ThreadedMoveGenerator implements IMoveGenerator {
         this.executor = executor;
     }
 
-
     public Collection<IMovedState> getPossibleMoveStates(IState state, PlayerColour player) {
 
+        //Get the Strategies (one per starting point)
         Collection<IMoveGenerationStrategy> strategies = buildStrategies(state, player);
 
         try {
@@ -34,6 +34,7 @@ public class ThreadedMoveGenerator implements IMoveGenerator {
 
             Collection<IMovedState> movedStates = new HashSet<IMovedState>(futures.size());
 
+            //Gets the actual MoveState object from the futures
             for (Future<IMovedState> future : futures) {
                 movedStates.add(future.get());
             }
@@ -49,6 +50,12 @@ public class ThreadedMoveGenerator implements IMoveGenerator {
         }
     }
 
+    /**
+     * Products a Move generation strategy object for every player-coloured cell in the IState
+     * @param state The State to generate moves for
+     * @param player The player we are generating moves for
+     * @return 1 Strategy object per player coloured cell
+     */
     private Collection<IMoveGenerationStrategy> buildStrategies(IState state, PlayerColour player) {
         Collection<IMoveGenerationStrategy> strategies = new ArrayList<IMoveGenerationStrategy>();
 
