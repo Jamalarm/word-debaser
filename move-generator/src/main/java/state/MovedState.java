@@ -3,8 +3,11 @@ package state;
 import api.IMovedState;
 import colours.PlayerColour;
 import move.Move;
+import verifiers.RecursiveVerifier;
 
 import java.util.Set;
+
+import static board.SimpleBoard.SEPARATOR;
 
 public class MovedState implements IMovedState {
 
@@ -23,9 +26,9 @@ public class MovedState implements IMovedState {
             builder.setColour(move.getColour(), coords[0], coords[1]);
         }
 
-        //TODO add some updating code here to modify the state
-
-        return builder.build();
+        IState tempState = builder.build();
+        //FIXME State is built twice here
+        return RecursiveVerifier.makeStateValid(tempState);
     }
 
     public Move getMove() {
@@ -50,5 +53,22 @@ public class MovedState implements IMovedState {
 
     public StateBuilder toBuilder() {
         return delegate.toBuilder();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder out = new StringBuilder();
+
+        for (int y = BOARD_Y - 1; y >= 0; y--) {
+            out.append(SEPARATOR);
+            for (int x = 0; x < BOARD_X; x++) {
+                out.append(delegate.getPlayerColour(x, y).getColourCode());
+                out.append(delegate.getChar(x, y));
+                out.append(SEPARATOR);
+            }
+            out.append("\n");
+        }
+
+        return out.toString();
     }
 }
