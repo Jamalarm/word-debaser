@@ -7,10 +7,7 @@ import state.IState;
 import strategies.IMoveGenerationStrategy;
 import strategies.MoveGenerationStrategyFactory;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
@@ -30,13 +27,13 @@ public class ThreadedMoveGenerator implements IMoveGenerator {
 
         try {
             //Call will invoke all strategies on the thread pool and wait for return - this is where the multithreading happens
-            List<Future<IMovedState>> futures = executor.invokeAll(strategies);
+            List<Future<Set<IMovedState>>> futures = executor.invokeAll(strategies);
 
             Collection<IMovedState> movedStates = new HashSet<IMovedState>(futures.size());
 
             //Gets the actual MoveState object from the futures
-            for (Future<IMovedState> future : futures) {
-                movedStates.add(future.get());
+            for (Future<Set<IMovedState>> future : futures) {
+                movedStates.addAll(future.get());
             }
 
             return movedStates;

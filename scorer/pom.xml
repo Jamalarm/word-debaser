@@ -24,6 +24,12 @@
             <version>1.10.19</version>
         </dependency>
 
+        <dependency>
+            <groupId>kc</groupId>
+            <artifactId>move-generator</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 
 
