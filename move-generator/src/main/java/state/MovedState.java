@@ -62,7 +62,7 @@ public class MovedState implements IMovedState {
         for (int y = BOARD_Y - 1; y >= 0; y--) {
             out.append(SEPARATOR);
             for (int x = 0; x < BOARD_X; x++) {
-                out.append(delegate.getPlayerColour(x, y).getColourCode());
+                out.append(delegate.getPlayerColour(x, y).getASCIIFormatCode());
                 out.append(delegate.getChar(x, y));
                 out.append(SEPARATOR);
             }

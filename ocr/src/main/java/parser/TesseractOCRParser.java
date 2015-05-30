@@ -1,8 +1,10 @@
 package parser;
 
+import api.IPlayerColourParser;
 import api.IStateOCRParser;
 import board.IBoard;
 import board.SimpleBoard;
+import colours.PlayerColour;
 import net.sourceforge.tess4j.Tesseract1;
 import net.sourceforge.tess4j.TesseractException;
 import net.sourceforge.tess4j.util.LoadLibs;
@@ -12,6 +14,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class TesseractOCRParser implements IStateOCRParser {
@@ -19,10 +22,12 @@ public class TesseractOCRParser implements IStateOCRParser {
     private static final String TESS_DATA = "tessData";
 
     private final Tesseract1 tess;
+    private final IPlayerColourParser colourParser;
 
     public TesseractOCRParser() {
         //Get tesseract insance
         tess = getTessInstance();
+        colourParser = new RandomSamplingMedianPlayerColourParser();
     }
 
     public IState parseState(File img) {
@@ -34,8 +39,11 @@ public class TesseractOCRParser implements IStateOCRParser {
 
             BufferedImage[][] cellImages = imagePartitioner.getCellImages();
 
-            IBoard board = buildBoard(cellImages);
-            System.out.println(board);
+            PlayerColour[][] playerColours = colourParser.parsePlayerColours(cellImages);
+
+            IBoard board = buildBoardFromTotalParsing(imagePartitioner.getBoard());
+//            IBoard board = buildBoardFromSingleParsings(cellImages);
+            System.out.println(Arrays.deepToString(playerColours));
 
         } catch (IOException e) {
             System.err.println("Error encountered in loading image file for parsing");
@@ -44,7 +52,21 @@ public class TesseractOCRParser implements IStateOCRParser {
         return null;
     }
 
-    private IBoard buildBoard(BufferedImage[][] cellImages) {
+    private IBoard buildBoardFromTotalParsing(BufferedImage board) {
+
+        tess.setPageSegMode(6);
+
+        try {
+            String s = tess.doOCR(board);
+            System.out.println(s);
+        } catch (TesseractException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private IBoard buildBoardFromSingleParsings(BufferedImage[][] cellImages) {
         char[][] chars = new char[cellImages.length][];
 
         for (int x = 0; x < chars.length; x++) {
@@ -86,7 +108,7 @@ public class TesseractOCRParser implements IStateOCRParser {
         File tessDataFolder = LoadLibs.extractTessResources(TESS_DATA);
         tess.setDatapath(tessDataFolder.getParentFile().getAbsolutePath());
         tess.setConfigs(Collections.singletonList("upper_case_alphabet_only"));
-        tess.setPageSegMode(10);
+//        tess.setPageSegMode(10);
         return tess;
     }
 }
