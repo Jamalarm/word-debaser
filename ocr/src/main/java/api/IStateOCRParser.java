@@ -2,7 +2,7 @@ package api;
 
 import state.IState;
 
-import java.awt.*;
+import java.io.File;
 
 public interface IStateOCRParser {
 
@@ -11,5 +11,5 @@ public interface IStateOCRParser {
      * @param img A screenshot of the game screen
      * @return A IState representing the state of the game as in the image supplied
      */
-    IState parseState(Image img);
+    IState parseState(File img);
 }
