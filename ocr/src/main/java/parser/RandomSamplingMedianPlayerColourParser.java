@@ -4,13 +4,14 @@ import api.IPlayerColourParser;
 import colours.PlayerColour;
 import org.apache.commons.lang.math.RandomUtils;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
 public class RandomSamplingMedianPlayerColourParser implements IPlayerColourParser {
 
-    public static final int SAMPLE_COUNT = 10;
+    public static final int SAMPLE_COUNT = 50;
     public static final int BORDER_BIAS = 5;
 
 
@@ -44,7 +45,7 @@ public class RandomSamplingMedianPlayerColourParser implements IPlayerColourPars
         int xRange = cellImg.getWidth() - BORDER_BIAS;
         int yRange = cellImg.getHeight() - BORDER_BIAS;
 
-        //Autoboxing... I know
+        //TODO rewrite without autoboxing - maybe use Tcollections int int map?
         Map<Integer, Integer> colourCounts = new HashMap<Integer, Integer>();
 
         for (int i = 0; i < SAMPLE_COUNT; i++) {
@@ -69,6 +70,6 @@ public class RandomSamplingMedianPlayerColourParser implements IPlayerColourPars
             }
         }
 
-        return PlayerColour.getFromColourCode(medianColour);
+        return PlayerColour.getFromColourCode(new Color(medianColour), 5);
     }
 }
